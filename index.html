@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimberly Hannah Kazi — Director, Builder, Operator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --dark: #1a1a1a;
+    --mid: #2e2e2e;
+    --border: #2a2a2a;
+    --muted: #555;
+    --light: #a0a0a0;
+    --cream: #e8e2d9;
+    --gold: #b8965a;
+    --white: #f5f0eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* TICKER */
+  .ticker-wrap { width: 100%; overflow: hidden; background: var(--gold); padding: 0.45rem 0; }
+  .ticker-inner { display: inline-flex; animation: ticker 32s linear infinite; white-space: nowrap; }
+  .ticker-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    padding: 0 2.5rem;
+  }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(184,150,90,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(184,150,90,0.04) 0%, transparent 60%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 4rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-label::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease 0.35s both;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75em;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+  .hero-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .hero-meta-value { font-size: 0.95rem; color: var(--cream); font-weight: 400; }
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--light);
+    line-height: 1.8;
+    max-width: 480px;
+    font-weight: 300;
+    animation: fadeUp 0.8s ease 0.65s both;
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .profile-frame { width: 300px; height: 380px; position: relative; }
+  .profile-frame::before {
+    content: '';
+    position: absolute;
+    top: 12px; left: 12px; right: -12px; bottom: -12px;
+    border: 1px solid var(--gold);
+    z-index: 0;
+  }
+  .profile-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+    border: 1px solid var(--border);
+  }
+  .profile-initials {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6rem;
+    color: var(--gold);
+    opacity: 0.3;
+    letter-spacing: 0.1em;
+  }
+  .scroll-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .scroll-hint::after { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, var(--muted), transparent); }
+
+  /* SECTIONS */
+  .sw { padding: 7rem 3rem; border-bottom: 1px solid var(--border); }
+  .si { max-width: 1280px; margin: 0 auto; }
+  .sl {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .sl::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem; align-items: start; }
+  .about-text p { color: var(--light); margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.85; }
+  .about-text strong { color: var(--cream); font-weight: 600; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    color: var(--light);
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .tag:hover { border-color: var(--gold); color: var(--gold); background: rgba(184,150,90,0.05); }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--border); }
+  .stat-card { background: var(--off-black); padding: 2rem; text-align: center; }
+  .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--gold); line-height: 1; display: block; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+
+  /* CARDS */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    margin-top: 3rem;
+  }
+  .portfolio-card {
+    background: var(--off-black);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .portfolio-card:hover { background: var(--dark); }
+  .portfolio-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .portfolio-card:hover::before { transform: scaleX(1); }
+  .card-icon { font-size: 1.8rem; margin-bottom: 1.2rem; display: block; }
+  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--cream); margin-bottom: 0.5rem; }
+  .card-type { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .card-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+  /* WORK */
+  .work-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .work-item:last-child { border-bottom: none; }
+  .work-number { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: var(--border); line-height: 1; margin-bottom: 0.5rem; }
+  .work-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--cream); margin-bottom: 0.4rem; }
+  .work-scope { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .work-content p { color: var(--light); font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.2rem; }
+  .work-content strong { color: var(--cream); font-weight: 600; }
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+  .tech-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.7rem;
+    background: rgba(184,150,90,0.08);
+    border: 1px solid rgba(184,150,90,0.25);
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* CLAUDE */
+  .claude-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.3;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+  .claude-quote em { color: var(--gold); font-style: normal; }
+  .claude-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
+  .claude-card { background: var(--black); padding: 2.5rem; }
+  .claude-card-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+  .claude-card-title { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .claude-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+  /* GIVING */
+  .giving-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+  .giving-grid p { color: var(--light); font-size: 1.1rem; line-height: 1.9; margin-bottom: 1.5rem; }
+  .giving-grid strong { color: var(--cream); }
+  .giving-cards { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); }
+  .giving-card { background: var(--off-black); padding: 1.8rem 2rem; display: flex; align-items: flex-start; gap: 1.5rem; }
+  .giving-card-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 0.2rem; }
+  .giving-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .giving-card-text { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+
+  /* CONTACT */
+  .contact-center { text-align: center; max-width: 800px; margin: 0 auto; }
+  .contact-links { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; flex-wrap: wrap; }
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light);
+    text-decoration: none;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    transition: color 0.3s;
+  }
+  .contact-link span { font-size: 1.4rem; }
+  .contact-link:hover { color: var(--gold); }
+  .contact-note {
+    margin-top: 4rem;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    text-align: left;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contact-note p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+  .contact-note strong { color: var(--light); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+  footer p { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  footer span { color: var(--gold); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links li:nth-child(n+4) { display: none; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-grid, .about-grid, .giving-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-right { display: none; }
+    .sw { padding: 5rem 1.5rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .work-item { grid-template-columns: 1fr; gap: 1.5rem; }
+    .claude-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Kimberly Hannah Kazi</div>
+  <ul class="nav-links">
+    <li><a href="#about">APX Group</a></li>
+    <li><a href="#work">My Role</a></li>
+    <li><a href="#claude">Claude</a></li>
+    <li><a href="#giving">Giving</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- TICKER -->
+<div style="margin-top:64px;">
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <span>APX Group</span><span>◆</span>
+      <span>Apex Homes MGT</span><span>◆</span>
+      <span>Apex Property Marketplace</span><span>◆</span>
+      <span>Kazi Resort</span><span>◆</span>
+      <span>Apex DMIT</span><span>◆</span>
+      <span>Penn State Finance</span><span>◆</span>
+      <span>Gazipur, Bangladesh</span><span>◆</span>
+      <span>Claude Power User</span><span>◆</span>
+      <span>APX Group</span><span>◆</span>
+      <span>Apex Homes MGT</span><span>◆</span>
+      <span>Apex Property Marketplace</span><span>◆</span>
+      <span>Kazi Resort</span><span>◆</span>
+      <span>Apex DMIT</span><span>◆</span>
+      <span>Penn State Finance</span><span>◆</span>
+      <span>Gazipur, Bangladesh</span><span>◆</span>
+      <span>Claude Power User</span><span>◆</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-label">Director · Operator · Builder</div>
+      <h1 class="hero-title">
+        I run businesses.
+        <em>I build with Claude.</em>
+      </h1>
+      <div class="hero-meta">
+        <div>
+          <div class="hero-meta-label">Role</div>
+          <div class="hero-meta-value">Director, APX Group</div>
+        </div>
+        <div>
+          <div class="hero-meta-label">Based in</div>
+          <div class="hero-meta-value">USA · Bangladesh</div>
+        </div>
+        <div>
+          <div class="hero-meta-label">Scope</div>
+          <div class="hero-meta-value">Property · Hospitality · Tech</div>
+        </div>
+        <div>
+          <div class="hero-meta-label">Claude user since</div>
+          <div class="hero-meta-value">Day one</div>
+        </div>
+      </div>
+      <p class="hero-desc">
+        I grew up navigating two worlds — American boardrooms and Bangladeshi family enterprise. Now I lead a multi-entity portfolio spanning property management, hospitality, and technology. Claude is how I move faster than anyone expects.
+      </p>
+    </div>
+    <div class="hero-right">
+      <div class="profile-frame">
+        <div class="profile-placeholder">
+          <span class="profile-initials">KHK</span>
+        </div>
+      </div>
+      <div class="scroll-hint">Scroll to explore</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO I AM -->
+<div class="sw" id="about">
+  <div class="si">
+    <div class="sl">Who I Am</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Kimberly<br>Hannah Kazi</h2>
+        <p>
+          I was born into a family that built things — businesses that span property services in the US and hospitality in Bangladesh. After earning my <strong>BSc in Finance from Penn State</strong>, I didn't just inherit a seat at the table. I came in with a plan: tighten the financials, modernize the operations, and build systems that actually scale.
+        </p>
+        <p>
+          As Director of <strong>APX Group</strong>, I oversee a portfolio of interconnected businesses — property management and preservation across the US, a managed technology division, and a luxury resort in Bangladesh. My edge is that I don't just oversee — I <strong>build</strong>. Financial dashboards, QC frameworks, AI-powered tools, and automation pipelines that make every operation run sharper.
+        </p>
+        <p>
+          I believe deeply in the power of technology to change lives — not just in business, but as a genuine force for good in communities that need it most.
+        </p>
+        <div class="about-tags">
+          <div class="tag">🎓 Penn State Finance</div>
+          <div class="tag">🏢 Multi-Entity Director</div>
+          <div class="tag">🤖 Agentic AI Builder</div>
+          <div class="tag">🏨 Hospitality Operator</div>
+          <div class="tag">💻 Tech for Good</div>
+          <div class="tag">💪 Fitness</div>
+          <div class="tag">📊 Financial Strategy</div>
+          <div class="tag">🌏 Bangladesh</div>
+        </div>
+      </div>
+      <div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number">4</span>
+            <div class="stat-label">Business Entities</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">2</span>
+            <div class="stat-label">Countries</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">75+</span>
+            <div class="stat-label">Employees Managed</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">6</span>
+            <div class="stat-label">Portfolio Teams</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">85+</span>
+            <div class="stat-label">Resort QC Checkpoints</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">25+</span>
+            <div class="stat-label">DMIT Audits Completed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE PORTFOLIO -->
+<div class="sw" style="background: var(--off-black);">
+  <div class="si">
+    <div class="sl">The Portfolio</div>
+    <h2>APX Group — Built<br>Across Two Continents</h2>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <span class="card-icon">🏗️</span>
+        <div class="card-type">Property Preservation · USA</div>
+        <div class="card-title">APX Group</div>
+        <p class="card-desc">The parent company overseeing multiple US-based property operations. I lead finance, KPI tracking, and strategic direction across all entities and six active field teams: WolfPack, Trailblazers, Archons, PresGuard, Thunderbolts, and Titans.</p>
+      </div>
+
+      <div class="portfolio-card">
+        <span class="card-icon">🏠</span>
+        <div class="card-type">Property Management · USA</div>
+        <div class="card-title">Apex Homes MGT</div>
+        <p class="card-desc">Residential property management operations under the APX umbrella. I oversee financial reporting, AR tracking, and operational performance across the managed housing portfolio.</p>
+      </div>
+
+      <div class="portfolio-card">
+        <span class="card-icon">🏡</span>
+        <div class="card-type">Proptech · USA</div>
+        <div class="card-title">Apex Property Marketplace</div>
+        <p class="card-desc">A property marketplace platform under active development. I built the APX Property Analyzer — a Node.js/Express application powered by Claude Vision that automatically categorizes job site photos and generates bid documents.</p>
+      </div>
+
+      <div class="portfolio-card">
+        <span class="card-icon">🏨</span>
+        <div class="card-type">Luxury Hospitality · Gazipur, Bangladesh</div>
+        <div class="card-title">Kazi Resort</div>
+        <p class="card-desc">A boutique luxury retreat destination in Gazipur. I'm leading a full operational overhaul — QC frameworks benchmarked against international luxury standards, a 5-document staff training system, and a custom HMS frontend in React/Vite with 11 screens.</p>
+      </div>
+
+      <div class="portfolio-card">
+        <span class="card-icon">💻</span>
+        <div class="card-type">Managed Services · USA</div>
+        <div class="card-title">Apex DMIT</div>
+        <p class="card-desc">Technology and managed services operations. I led a comprehensive performance audit of 25+ team members, producing structured findings reports covering PPW, WO, JN, GI, OAF, and RFO processing queues.</p>
+      </div>
+
+      <div class="portfolio-card" style="background: linear-gradient(135deg, var(--off-black), var(--dark)); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <span class="card-icon">◆</span>
+        <div class="card-title" style="color:var(--gold); font-size:1rem;">One family.<br>One vision.</div>
+        <p class="card-desc" style="margin-top:0.75rem; font-size:0.85rem;">Every entity operates independently — but all share the same standard of excellence, financial discipline, and commitment to growth.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MY ROLE -->
+<div class="sw" id="work">
+  <div class="si">
+    <div class="sl">My Role Across APX Group</div>
+    <h2>Finance. Operations.<br>Systems. Strategy.</h2>
+
+    <div class="work-item">
+      <div>
+        <div class="work-number">01</div>
+        <div class="work-title">Financial Control & KPI Oversight</div>
+        <div class="work-scope">All Entities</div>
+      </div>
+      <div class="work-content">
+        <p>I own finance oversight across every APX entity — executive dashboards built from real data, reconciliation tracking, AR aging analysis, and audit QC monitoring, all consolidated into reporting tools I designed myself.</p>
+        <p>Key areas I actively manage include <strong>reconciliation backlogs, audit QC shortfalls, and AR overdue concentration</strong> across Greenville, Mercer, A1 Property, and SE Field operations. I work directly alongside our accounting and finance teams to close every gap.</p>
+        <div class="tech-stack">
+          <span class="tech-badge">Executive Dashboards</span>
+          <span class="tech-badge">AR / AP Aging</span>
+          <span class="tech-badge">KPI Frameworks</span>
+          <span class="tech-badge">Reconciliation Tracking</span>
+          <span class="tech-badge">Cash Flow Forecasting</span>
+          <span class="tech-badge">Claude</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div>
+        <div class="work-number">02</div>
+        <div class="work-title">Operations & QC Systems</div>
+        <div class="work-scope">Kazi Resort · Apex DMIT</div>
+      </div>
+      <div class="work-content">
+        <p>At Kazi Resort, I'm building a full operational infrastructure — an <strong>85+ item QC checklist</strong>, a Service Excellence Bible benchmarked against international luxury hospitality standards, a 5-document staff training system, and Room QC Cards for frontline teams.</p>
+        <p>At Apex DMIT, I led an audit of 25+ team members, producing detailed structured findings reports from raw team communications — covering the full processing queue across PPW, WO, JN, GI, OAF, and RFO.</p>
+        <div class="tech-stack">
+          <span class="tech-badge">QC Frameworks</span>
+          <span class="tech-badge">SOPs</span>
+          <span class="tech-badge">Audit Reports</span>
+          <span class="tech-badge">Training Systems</span>
+          <span class="tech-badge">Service Standards</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div>
+        <div class="work-number">03</div>
+        <div class="work-title">AI-Powered Tooling</div>
+        <div class="work-scope">APX · Kazi Resort</div>
+      </div>
+      <div class="work-content">
+        <p>I build the tools I need. The <strong>APX Property Analyzer</strong> uses Claude Vision to sort job site photos into before/during/after and auto-generate bid documents. Kazi Resort runs a CrewAI content agent with email approval workflows on n8n Cloud. Gmail inbox management is fully automated via n8n pipelines.</p>
+        <p>I also developed a custom <strong>Hotel Management System</strong> frontend in React/Vite — 11 screens, role-based dashboards — purpose-built for Kazi Resort's operational teams.</p>
+        <div class="tech-stack">
+          <span class="tech-badge">Claude Vision</span>
+          <span class="tech-badge">Node.js / Express</span>
+          <span class="tech-badge">n8n Cloud</span>
+          <span class="tech-badge">CrewAI</span>
+          <span class="tech-badge">React / Vite</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CLAUDE -->
+<div class="sw" id="claude" style="background: var(--off-black);">
+  <div class="si">
+    <div class="sl">Claude & Me</div>
+    <div class="claude-quote">
+      I don't just <em>use</em> Claude.<br>I build operations with it.
+    </div>
+    <div class="claude-grid">
+      <div class="claude-card">
+        <span class="claude-card-icon">🏗️</span>
+        <div class="claude-card-title">Vision AI in Property</div>
+        <p>The APX Property Analyzer uses Claude Vision to categorize job site photos automatically and generate bid documents — eliminating manual sorting across dozens of field teams.</p>
+      </div>
+      <div class="claude-card">
+        <span class="claude-card-icon">🏨</span>
+        <div class="claude-card-title">Resort Content & QC</div>
+        <p>A CrewAI agent blueprint runs Kazi Resort's content calendar end-to-end on n8n, with email-based approval workflows sending branded post drafts for review. QC frameworks built alongside it.</p>
+      </div>
+      <div class="claude-card">
+        <span class="claude-card-icon">📊</span>
+        <div class="claude-card-title">Executive Dashboards</div>
+        <p>Finance dashboards built from real data across six portfolio teams — KPI tracking, AR aging, reconciliation flagging, and audit QC shortfall monitoring. All Claude-assisted.</p>
+      </div>
+      <div class="claude-card">
+        <span class="claude-card-icon">📋</span>
+        <div class="claude-card-title">Audit Intelligence</div>
+        <p>Apex DMIT audit findings synthesized from raw Teams chat data across 25+ team members. Claude extracted, structured, and formatted findings into a professional Word report — zero manual sorting.</p>
+      </div>
+      <div class="claude-card">
+        <span class="claude-card-icon">🤖</span>
+        <div class="claude-card-title">n8n Automation</div>
+        <p>n8n Cloud workflows power Gmail inbox management, Kazi Resort's content approval chain, and operational triggers across the group. Claude is the reasoning layer inside every flow.</p>
+      </div>
+      <div class="claude-card">
+        <span class="claude-card-icon">🏡</span>
+        <div class="claude-card-title">HMS Development</div>
+        <p>The Kazi Resort Hotel Management System — 11 screens, role-based dashboards, built in React/Vite — was architected and scoped entirely with Claude as a thought partner and co-builder.</p>
+      </div>
+    </div>
+    <div style="margin-top:4rem; max-width:700px; margin-left:auto; margin-right:auto; text-align:center;">
+      <p style="color:var(--light); font-size:1.05rem; line-height:1.85;">
+        I chose Claude because the mission resonates. In Bangladesh — where AI adoption in traditional industry is near zero — deploying responsibly isn't optional. I want to be the operator who shows what real AI integration looks like for business families like mine.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- GIVING -->
+<div class="sw" id="giving">
+  <div class="si">
+    <div class="sl">Giving Back</div>
+    <h2>Technology Is the<br>Greatest Equalizer.</h2>
+    <div class="giving-grid">
+      <div>
+        <p>
+          I believe that <strong>access to technology changes the trajectory of a life</strong>. Not access in the abstract — but a real computer, in a real room, in a community that never expected to have one.
+        </p>
+        <p>
+          I'm working to donate computer labs to underserved communities because I believe modern technology is one of the most powerful ways to uplift lives at scale. A computer lab in the right place doesn't just give someone internet access — it opens the door to education, opportunity, and a future they couldn't have imagined.
+        </p>
+        <p>
+          I want the best for this world. I feel I can touch and impact more lives through modern technology than through almost anything else — and the more I build, the more I'm able to give.
+        </p>
+      </div>
+      <div class="giving-cards">
+        <div class="giving-card">
+          <div class="giving-card-icon">💻</div>
+          <div>
+            <div class="giving-card-label">Computer Lab Donations</div>
+            <div class="giving-card-text">Donating fully equipped computer labs to underserved schools and communities where access to technology is limited or nonexistent.</div>
+          </div>
+        </div>
+        <div class="giving-card">
+          <div class="giving-card-icon">🌍</div>
+          <div>
+            <div class="giving-card-label">Impact at Scale</div>
+            <div class="giving-card-text">A single computer lab can transform an entire community's relationship with education and opportunity. That's the scale I care about.</div>
+          </div>
+        </div>
+        <div class="giving-card">
+          <div class="giving-card-icon">✨</div>
+          <div>
+            <div class="giving-card-label">The Belief Behind It</div>
+            <div class="giving-card-text">Business is how I fund impact. Every entity I build, every operation I improve — it all compounds into a greater ability to give.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BANGLADESH -->
+<div class="sw" style="background: var(--off-black);">
+  <div class="si">
+    <div class="sl">Bangladesh & My Network</div>
+    <h2>Two Countries.<br>One Operating System.</h2>
+    <p style="color:var(--light); font-size:1.1rem; max-width:700px; margin-bottom:4rem; line-height:1.85;">
+      I operate across the US and Bangladesh — not as a visitor in either, but as a builder with real stakes. The family business has deep roots in Gazipur. I've spent significant time in both countries and I speak both contexts fluently.
+    </p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem;">
+      <div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; color:var(--cream); margin-bottom:1rem;">The Opportunity</h3>
+        <p style="color:var(--light); font-size:1rem; line-height:1.8;">Bangladesh is one of the world's fastest-growing economies with <strong style="color:var(--cream);">170 million people</strong>. The business community runs factories, supply chains, and multi-generational companies — but AI adoption in traditional industry is almost nonexistent. The gap between tech builders and business operators is enormous. I sit in both worlds.</p>
+      </div>
+      <div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; color:var(--cream); margin-bottom:1rem;">Why I'm Positioned</h3>
+        <p style="color:var(--light); font-size:1rem; line-height:1.8;">I have real operational stakes in hospitality, property services, and managed technology across two countries. I've already deployed AI in live production across multiple business lines. I'm not theorizing about AI in Bangladesh. I'm <strong style="color:var(--cream);">running it, right now</strong>, in a family business that spans two continents.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="sw" id="contact" style="border-bottom: none;">
+  <div class="si">
+    <div class="contact-center">
+      <div class="sl" style="justify-content:center;">Get in Touch</div>
+      <h2>Let's build something<br>real together.</h2>
+      <p style="color:var(--light); font-size:1.1rem; max-width:500px; margin:0 auto 1rem; line-height:1.8;">
+        Open to conversations about AI in traditional industry, Bangladesh business networks, and hospitality innovation.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:kazikimberly@gmail.com" class="contact-link">
+          <span>✉️</span>
+          kazikimberly@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/kimberly-hannah-3b11781b1" class="contact-link" target="_blank">
+          <span>💼</span>
+          LinkedIn
+        </a>
+      </div>
+      <div class="contact-note">
+        <p><strong>A note about this page:</strong> This site was built entirely by Claude — without a content brief, without a copy deck, without a design agency. Every detail here came from what Claude already knew from working alongside me every day. No prompts about my life. No background document. Just the AI that knows my businesses because it helped me build them. That's what real partnership looks like.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Kimberly Hannah Kazi</p>
+  <p>Built with Claude <span>⚡</span></p>
+</footer>
+
+</body>
+</html>
